@@ -19,13 +19,13 @@ function updateChipDisplay(chip, itemName, quantity) {
     // Selected state
     itemText.textContent = quantity > 1 ? `${itemName} (x${quantity})` : itemName;
     chip.classList.remove('border-slate-300', 'bg-white', 'text-slate-700');
-    chip.classList.add('border-blue-600', 'bg-blue-600', 'text-white');
+    chip.classList.add('border-brand-orange', 'bg-brand-orange', 'text-white');
     
     // Add X button if not already present
     if (!chip.querySelector('.remove-item')) {
       const removeBtn = document.createElement('button');
       removeBtn.type = 'button';
-      removeBtn.className = 'remove-item ml-1 hover:bg-blue-700 rounded-full p-0.5 transition-colors';
+      removeBtn.className = 'remove-item ml-1 hover:bg-brand-orange-dark rounded-full p-0.5 transition-colors';
       removeBtn.innerHTML = '<i data-lucide="x" class="h-3 w-3"></i>';
       removeBtn.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -41,7 +41,7 @@ function updateChipDisplay(chip, itemName, quantity) {
   } else {
     // Unselected state
     itemText.textContent = itemName;
-    chip.classList.remove('border-blue-600', 'bg-blue-600', 'text-white');
+    chip.classList.remove('border-brand-orange', 'bg-brand-orange', 'text-white');
     chip.classList.add('border-slate-300', 'bg-white', 'text-slate-700');
     
     // Remove X button
