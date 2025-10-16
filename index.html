@@ -681,133 +681,17 @@
        - Replace the placeholder fetch() URL with your CRM/email endpoint.
        - Consider adding reCAPTCHA or hCaptcha if spam becomes an issue. -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="config.js"></script>
+  <script src="google-sheets.js"></script>
+  <script src="item-chips.js"></script>
+  <script src="form-handler.js"></script>
   <script>
     // Initialize lucide icons with 1.5 stroke width
     lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });
 
     // Current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Item selection chips functionality with quantities
-    let selectedItems = {};
-    
-    function updateSelectedItemsDisplay() {
-      const selectedItemsArray = Object.entries(selectedItems).map(([item, quantity]) => {
-        return quantity > 1 ? `${item} (x${quantity})` : item;
-      });
-      document.getElementById('selected_items').value = selectedItemsArray.join(', ');
-    }
-    
-    function updateChipDisplay(chip, itemName, quantity) {
-      const itemText = chip.querySelector('.item-text');
-      
-      if (quantity > 0) {
-        // Selected state
-        itemText.textContent = quantity > 1 ? `${itemName} (x${quantity})` : itemName;
-        chip.classList.remove('border-slate-300', 'bg-white', 'text-slate-700');
-        chip.classList.add('border-blue-600', 'bg-blue-600', 'text-white');
-        
-        // Add X button if not already present
-        if (!chip.querySelector('.remove-item')) {
-          const removeBtn = document.createElement('button');
-          removeBtn.type = 'button';
-          removeBtn.className = 'remove-item ml-1 hover:bg-blue-700 rounded-full p-0.5 transition-colors';
-          removeBtn.innerHTML = '<i data-lucide="x" class="h-3 w-3"></i>';
-          removeBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            resetChip(chip, itemName);
-          });
-          chip.appendChild(removeBtn);
-          lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });
-        }
-      } else {
-        // Unselected state
-        itemText.textContent = itemName;
-        chip.classList.remove('border-blue-600', 'bg-blue-600', 'text-white');
-        chip.classList.add('border-slate-300', 'bg-white', 'text-slate-700');
-        
-        // Remove X button
-        const removeBtn = chip.querySelector('.remove-item');
-        if (removeBtn) {
-          removeBtn.remove();
-        }
-      }
-    }
-    
-    function resetChip(chip, itemName) {
-      chip.dataset.quantity = '0';
-      delete selectedItems[itemName];
-      updateChipDisplay(chip, itemName, 0);
-      updateSelectedItemsDisplay();
-    }
-    
-    document.querySelectorAll('.item-chip').forEach(function(chip) {
-      chip.addEventListener('click', function(e) {
-        // Don't trigger if clicking the X button
-        if (e.target.closest('.remove-item')) {
-          return;
-        }
-        
-        const itemName = this.dataset.item;
-        let quantity = parseInt(this.dataset.quantity) || 0;
-        
-        // Increase quantity
-        quantity++;
-        this.dataset.quantity = quantity;
-        
-        // Update selected items
-        selectedItems[itemName] = quantity;
-        
-        // Update chip display
-        updateChipDisplay(this, itemName, quantity);
-        
-        // Update form data
-        updateSelectedItemsDisplay();
-      });
-    });
-
-    // Lead form handling: show confirmation and optionally post to backend
-    document.querySelectorAll('.lead-form').forEach(function(form) {
-      form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const submitBtn = form.querySelector('button[type="submit"]');
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
-        }
-
-        // Collect form data
-        const data = Object.fromEntries(new FormData(form).entries());
-        data.page = window.location.href;
-        data.timestamp = new Date().toISOString();
-
-        // TODO: Post to your backend/CRM
-        // try {
-        //   await fetch('https://your-backend.example.com/api/leads', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(data)
-        //   });
-        // } catch (err) {
-        //   console.warn('Lead capture error:', err);
-        // }
-
-        // Confirmation UI
-        const source = form.dataset.form || 'Enquiry';
-        form.innerHTML = `
-          <div class="rounded-lg border border-green-200 bg-green-50 p-4">
-            <div class="flex items-start gap-3">
-              <i data-lucide="check-circle2" class="h-5 w-5 text-green-600"></i>
-              <div>
-                <div class="text-sm font-semibold text-slate-900">Thank you — we'll get back to you shortly.</div>
-                <p class="mt-1 text-sm text-slate-700">Your ${source.toLowerCase()} has been received. We typically respond within 24 hours. If it's urgent, please call us on <a href="tel:+441922123456" class="font-medium text-blue-700 hover:text-blue-800">01922 123 456</a>.</p>
-              </div>
-            </div>
-          </div>
-        `;
-        lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });
-      });
-    });
   </script>
 
 </body></html>
