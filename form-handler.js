@@ -91,9 +91,19 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('❌ Error submitting to Google Sheets:', error);
       }
 
-      // TODO: Next steps will be:
-      // 1. Send email to administrator
-      // 2. Navigate to WhatsApp with prefilled message
+      // Redirect to WhatsApp with prefilled message
+      setTimeout(() => {
+        try {
+          const whatsappResult = redirectToWhatsApp(processedData);
+          if (whatsappResult.success) {
+            console.log('✅ WhatsApp redirect initiated');
+          } else {
+            console.warn('⚠️ WhatsApp redirect failed:', whatsappResult.error);
+          }
+        } catch (error) {
+          console.error('❌ Error with WhatsApp redirect:', error);
+        }
+      }, 2000); // Wait 2 seconds to show the confirmation message first
 
       // Confirmation UI
       const source = form.dataset.form || 'Enquiry';
@@ -101,13 +111,24 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="rounded-lg border border-green-200 bg-green-50 p-4">
           <div class="flex items-start gap-3">
             <i data-lucide="check-circle2" class="h-5 w-5 text-green-600"></i>
-            <div>
+            <div class="flex-1">
               <div class="text-sm font-semibold text-slate-900">Thank you — we'll get back to you shortly.</div>
               <p class="mt-1 text-sm text-slate-700">Your ${source.toLowerCase()} has been received. We typically respond within 24 hours. If it's urgent, please call us on <a href="tel:+441922123456" class="font-medium text-blue-700 hover:text-blue-800">01922 123 456</a>.</p>
+              <div class="mt-3">
+                <p class="text-xs text-slate-600 mb-2">You'll be redirected to WhatsApp in a moment, or click below:</p>
+                <div id="whatsapp-button-container"></div>
+              </div>
             </div>
           </div>
         </div>
       `;
+      
+      // Add WhatsApp button to the confirmation UI
+      const buttonContainer = form.querySelector('#whatsapp-button-container');
+      if (buttonContainer && typeof showWhatsAppButton === 'function') {
+        showWhatsAppButton(processedData, buttonContainer);
+      }
+      
       lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });
     });
   });

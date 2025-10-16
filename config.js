@@ -25,7 +25,11 @@ const CONFIG = {
     D: 'pickup_address',
     E: 'dropoff_address',
     F: 'selected_items_formatted'
-  }
+  },
+
+  // WhatsApp Configuration
+  WHATSAPP_PHONE: '447497460219', // Business WhatsApp number
+  BUSINESS_NAME: 'Boxit Logistics and Storage'
 };
 
 // Export for use in other files
