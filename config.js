@@ -11,7 +11,7 @@ const CONFIG = {
   
   // OAuth2 Client ID (required for write operations)
   // Get this from Google Cloud Console > APIs & Services > Credentials > OAuth 2.0 Client IDs
-  GOOGLE_CLIENT_ID: 'YOUR_CLIENT_ID_HERE.apps.googleusercontent.com', // Replace with your actual client ID
+  GOOGLE_CLIENT_ID: '379038705771-jp7a5rku7osaoge3guk56bf7nc9l3ou9.apps.googleusercontent.com', // Replace with your actual client ID
   
   // Sheet configuration
   SHEET_NAME: 'Sheet1', // or whatever your sheet tab is named
