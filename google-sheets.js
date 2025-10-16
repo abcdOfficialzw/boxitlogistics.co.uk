@@ -9,31 +9,33 @@ class GoogleSheetsAPI {
     this.accessToken = null;
   }
 
-  // Function to authenticate with Google OAuth2
+  // Function to authenticate with Google Identity Services
   async authenticate() {
     return new Promise((resolve, reject) => {
-      if (typeof gapi === 'undefined') {
-        reject(new Error('Google API not loaded. Please include the Google API script.'));
+      if (typeof google === 'undefined' || !google.accounts) {
+        reject(new Error('Google Identity Services not loaded. Please include the Google Identity Services script.'));
         return;
       }
 
-      gapi.load('auth2', () => {
-        gapi.auth2.init({
-          client_id: this.clientId,
-          scope: 'https://www.googleapis.com/auth/spreadsheets'
-        }).then(() => {
-          const authInstance = gapi.auth2.getAuthInstance();
-          if (authInstance.isSignedIn.get()) {
-            this.accessToken = authInstance.currentUser.get().getAuthResponse().access_token;
-            resolve(this.accessToken);
+      // Check if already authenticated
+      if (this.accessToken) {
+        resolve(this.accessToken);
+        return;
+      }
+
+      // Initialize the Google Identity Services
+      google.accounts.oauth2.initTokenClient({
+        client_id: this.clientId,
+        scope: 'https://www.googleapis.com/auth/spreadsheets',
+        callback: (response) => {
+          if (response.error) {
+            reject(new Error(`Authentication failed: ${response.error}`));
           } else {
-            authInstance.signIn().then(() => {
-              this.accessToken = authInstance.currentUser.get().getAuthResponse().access_token;
-              resolve(this.accessToken);
-            }).catch(reject);
+            this.accessToken = response.access_token;
+            resolve(this.accessToken);
           }
-        }).catch(reject);
-      });
+        }
+      }).requestAccessToken();
     });
   }
 
@@ -187,20 +189,26 @@ async function submitToGoogleSheets(formData) {
 async function debugGoogleSheetsAPI() {
   console.log('🔍 Starting Google Sheets API Debug...');
   console.log('Sheet ID:', CONFIG.GOOGLE_SHEET_ID);
-  console.log('API Key:', CONFIG.GOOGLE_API_KEY.substring(0, 10) + '...');
+  console.log('Client ID:', CONFIG.GOOGLE_CLIENT_ID.substring(0, 20) + '...');
+  console.log('Google Identity Services loaded:', typeof google !== 'undefined' && !!google.accounts);
   
   try {
-    // Test 1: Basic connection
-    console.log('\n📡 Test 1: Basic Connection');
+    // Test 1: Authentication
+    console.log('\n🔐 Test 1: Authentication');
+    const authTest = await googleSheets.authenticate();
+    console.log('Authentication test result:', authTest ? 'Success' : 'Failed');
+    
+    // Test 2: Basic connection
+    console.log('\n📡 Test 2: Basic Connection');
     const connectionTest = await googleSheets.testConnection();
     console.log('Connection test result:', connectionTest);
     
-    // Test 2: Sheet access
-    console.log('\n📊 Test 2: Sheet Access');
+    // Test 3: Sheet access
+    console.log('\n📊 Test 3: Sheet Access');
     const sheetTest = await googleSheets.testSheetAccess();
     console.log('Sheet access test result:', sheetTest);
     
-    return { connectionTest, sheetTest };
+    return { authTest, connectionTest, sheetTest };
   } catch (error) {
     console.error('❌ Debug failed:', error);
     return { error: error.message };
