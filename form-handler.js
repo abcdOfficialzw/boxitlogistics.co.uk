@@ -9,7 +9,10 @@ async function submitToAppScript(formData) {
       phone: formData.phone || '',
       pickup: formData.pickup_address || '',
       dropoff: formData.dropoff_address || '',
-      selected_items_formatted: formData.selected_items_formatted || ''
+      selected_items_formatted: formData.selected_items_formatted || '',
+      contact_method: formData.contact_method || '',
+      email: formData.email || '',
+      message: formData.message || ''
     };
 
     console.log('Submitting to AppScript:', appScriptData);
@@ -40,6 +43,33 @@ async function submitToAppScript(formData) {
       success: false,
       error: error.message
     };
+  }
+}
+
+// Variant that targets a specific endpoint (used to route contact vs hero forms)
+async function submitToAppScriptWithEndpoint(formData, endpointUrl) {
+  try {
+    const appScriptData = {
+      name: formData.name || '',
+      phone: formData.phone || '',
+      pickup: formData.pickup_address || '',
+      dropoff: formData.dropoff_address || '',
+      selected_items_formatted: formData.selected_items_formatted || '',
+      contact_method: formData.contact_method || '',
+      email: formData.email || '',
+      message: formData.message || ''
+    };
+
+    const response = await fetch(endpointUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify(appScriptData)
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const result = await response.text();
+    return { success: true, data: result };
+  } catch (error) {
+    return { success: false, error: error.message };
   }
 }
 
@@ -147,31 +177,38 @@ document.addEventListener('DOMContentLoaded', function() {
       // Process and log the quote request
       const processedData = processQuoteRequest(data);
 
-      // Submit to Google Sheets via AppScript
+      // Submit to AppScript: choose endpoint by form source
       try {
-        const sheetResult = await submitToAppScript(processedData);
+        const formLabel = (form.dataset.form || '').toLowerCase();
+        const isContactForm = formLabel.includes('contact');
+        const endpoint = isContactForm && CONFIG.CONTACT_APPSCRIPT_URL ? CONFIG.CONTACT_APPSCRIPT_URL : CONFIG.GOOGLE_APPSCRIPT_URL;
+
+        const sheetResult = await submitToAppScriptWithEndpoint(processedData, endpoint);
         if (sheetResult.success) {
-          console.log('✅ Successfully added to Google Sheets via AppScript');
+          console.log('✅ Submitted to AppScript');
         } else {
-          console.warn('⚠️ Failed to add to Google Sheets:', sheetResult.error);
+          console.warn('⚠️ AppScript submission failed:', sheetResult.error);
         }
       } catch (error) {
-        console.error('❌ Error submitting to Google Sheets:', error);
+        console.error('❌ Error submitting to AppScript:', error);
       }
 
-      // Redirect to WhatsApp with prefilled message
-      setTimeout(() => {
-        try {
-          const whatsappResult = redirectToWhatsApp(processedData);
-          if (whatsappResult.success) {
-            console.log('✅ WhatsApp redirect initiated');
-          } else {
-            console.warn('⚠️ WhatsApp redirect failed:', whatsappResult.error);
+      // Only the hero quote form redirects to WhatsApp; contact form does not
+      const isContactForm = (form.dataset.form || '').toLowerCase().includes('contact');
+      if (!isContactForm) {
+        setTimeout(() => {
+          try {
+            const whatsappResult = redirectToWhatsApp(processedData);
+            if (whatsappResult.success) {
+              console.log('✅ WhatsApp redirect initiated');
+            } else {
+              console.warn('⚠️ WhatsApp redirect failed:', whatsappResult.error);
+            }
+          } catch (error) {
+            console.error('❌ Error with WhatsApp redirect:', error);
           }
-        } catch (error) {
-          console.error('❌ Error with WhatsApp redirect:', error);
-        }
-      }, 2000); // Wait 2 seconds to show the confirmation message first
+        }, 2000);
+      }
 
       // Confirmation UI
       const source = form.dataset.form || 'Enquiry';
@@ -192,8 +229,9 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
       
       // Add WhatsApp button to the confirmation UI
+      const isContact = (form.dataset.form || '').toLowerCase().includes('contact');
       const buttonContainer = form.querySelector('#whatsapp-button-container');
-      if (buttonContainer && typeof showWhatsAppButton === 'function') {
+      if (!isContact && buttonContainer && typeof showWhatsAppButton === 'function') {
         showWhatsAppButton(processedData, buttonContainer);
       }
       
