@@ -1,5 +1,48 @@
 // Form handling logic for Boxit Logistics quote requests
 
+// Function to submit data to Google Sheets via AppScript
+async function submitToAppScript(formData) {
+  try {
+    // Map form data to AppScript endpoint format
+    const appScriptData = {
+      name: formData.name || '',
+      phone: formData.phone || '',
+      pickup: formData.pickup_address || '',
+      dropoff: formData.dropoff_address || '',
+      selected_items_formatted: formData.selected_items_formatted || ''
+    };
+
+    console.log('Submitting to AppScript:', appScriptData);
+
+    // Send as a CORS-simple request to avoid preflight (no custom headers)
+    const response = await fetch(CONFIG.GOOGLE_APPSCRIPT_URL, {
+      method: 'POST',
+      // text/plain is CORS-safelisted; Apps Script can JSON.parse(e.postData.contents)
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify(appScriptData)
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.text();
+    console.log('AppScript response:', result);
+
+    return {
+      success: true,
+      data: result
+    };
+
+  } catch (error) {
+    console.error('AppScript submission error:', error);
+    return {
+      success: false,
+      error: error.message
+    };
+  }
+}
+
 // Function to process form submission and log details
 function processQuoteRequest(formData) {
   console.log('=== QUOTE REQUEST SUBMITTED ===');
@@ -54,6 +97,31 @@ function processQuoteRequest(formData) {
   return formData;
 }
 
+// Test function to verify AppScript integration (for development)
+async function testAppScriptIntegration() {
+  const testData = {
+    name: 'Test User',
+    phone: '0787980222',
+    pickup_address: '1234',
+    dropoff_address: '1234',
+    selected_items_formatted: 'Bed x2, Sofa x3'
+  };
+  
+  console.log('🧪 Testing AppScript integration...');
+  const result = await submitToAppScript(testData);
+  
+  if (result.success) {
+    console.log('✅ AppScript integration test successful!');
+  } else {
+    console.error('❌ AppScript integration test failed:', result.error);
+  }
+  
+  return result;
+}
+
+// Uncomment the line below to test the integration
+// testAppScriptIntegration();
+
 // Initialize form functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   // Lead form handling: show confirmation and process data
@@ -79,11 +147,11 @@ document.addEventListener('DOMContentLoaded', function() {
       // Process and log the quote request
       const processedData = processQuoteRequest(data);
 
-      // Submit to Google Sheets
+      // Submit to Google Sheets via AppScript
       try {
-        const sheetResult = await submitToGoogleSheets(processedData);
+        const sheetResult = await submitToAppScript(processedData);
         if (sheetResult.success) {
-          console.log('✅ Successfully added to Google Sheets');
+          console.log('✅ Successfully added to Google Sheets via AppScript');
         } else {
           console.warn('⚠️ Failed to add to Google Sheets:', sheetResult.error);
         }
