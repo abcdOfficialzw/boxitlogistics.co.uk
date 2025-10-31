@@ -1,6 +1,6 @@
 # Boxit Logistics Website — Easy Editing Guide
 
-This guide shows how you (non-technical) can safely update text, images, and common content on the website using only the GitHub web interface. When you save (commit) changes, the site will automatically redeploy.
+This guide shows how you can safely update text, images, and common content on the website using only the GitHub web interface. When you save (commit) changes, the site will automatically redeploy.
 
 If you get stuck at any step, stop and contact support; we can revert changes easily.
 
