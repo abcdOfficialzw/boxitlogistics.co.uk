@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <i data-lucide="check-circle2" class="h-5 w-5 text-green-600"></i>
             <div class="flex-1">
               <div class="text-sm font-semibold text-slate-900">Thank you — we'll get back to you shortly.</div>
-              <p class="mt-1 text-sm text-slate-700">Your ${source.toLowerCase()} has been received. We typically respond within 24 hours. If it's urgent, please call us on <a href="tel:+441922123456" class="font-medium text-blue-700 hover:text-blue-800">01922 123 456</a>.</p>
+              <p class="mt-1 text-sm text-slate-700">Your ${source.toLowerCase()} has been received. We typically respond within 24 hours. If it's urgent, please call us on <a href="tel:+${CONFIG.CALL_PHONE}" class="font-medium text-blue-700 hover:text-blue-800">${CONFIG.DISPLAY_PHONE}</a>.</p>
               <div class="mt-3">
                 <p class="text-xs text-slate-600 mb-2">You'll be redirected to WhatsApp in a moment, or click below:</p>
                 <div id="whatsapp-button-container"></div>
