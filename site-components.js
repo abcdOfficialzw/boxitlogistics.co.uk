@@ -5,11 +5,18 @@
     email: (window.CONFIG && window.CONFIG.EMAIL) || "nobert@boxitlogistics.co.uk",
   };
 
-  const navItems = [
-    { id: "home", label: "Home", href: "/" },
+  const serviceLinks = [
     { id: "house-removals", label: "House Removals", href: "/house-removals-walsall/" },
     { id: "office-moves", label: "Office Moves", href: "/office-moves-walsall/" },
     { id: "storage", label: "Storage", href: "/storage-solutions-walsall/" },
+    { id: "handyman", label: "Handyman & Interiors", href: "/handyman-media-walls-midlands/" },
+  ];
+
+  const navItems = [
+    { id: "home", label: "Home", href: "/" },
+    { id: "services", label: "Services", type: "dropdown", children: serviceLinks },
+    { id: "reviews", label: "Reviews", href: "/reviews/" },
+    { id: "blog", label: "Blog", href: "/blog/" },
     { id: "faqs", label: "FAQs", href: "/faqs/" },
   ];
 
@@ -19,12 +26,15 @@
     { label: "Furniture Delivery", href: "/furniture-delivery-walsall/" },
     { label: "Furniture Assembly", href: "/furniture-assembly-dismantling-walsall/" },
     { label: "Storage Solutions", href: "/storage-solutions-walsall/" },
+    { label: "Handyman & Media Walls", href: "/handyman-media-walls-midlands/" },
     { label: "Removals in Walsall", href: "/removals-walsall/" },
   ];
 
   const footerAreaLinks = [
     { label: "Removal Company Wolverhampton", href: "/removal-company-wolverhampton/" },
     { label: "Walsall to London Moves", href: "/house-removals-walsall-to-london/" },
+    { label: "Reviews", href: "/reviews/" },
+    { label: "Blog", href: "/blog/" },
     { label: "Privacy Policy", href: "/privacy-policy.html" },
     { label: "Terms of Service", href: "/terms-of-service.html" },
   ];
@@ -37,13 +47,38 @@
 
   function renderNav(activeId) {
     return navItems
-      .map((item) => `<a href="${item.href}" class="${navLinkClasses(item.id === activeId)}">${item.label}</a>`)
+      .map((item) => {
+        if (item.type === "dropdown") {
+          const groupActive = item.children.some((c) => c.id === activeId);
+          const menu = item.children
+            .map((c) => `<a href="${c.href}" class="block rounded-md px-3 py-2 text-sm ${c.id === activeId ? "text-brand-orange" : "text-slate-600 hover:bg-brand-cream hover:text-brand-orange"}">${c.label}</a>`)
+            .join("");
+          return `
+            <div class="group relative">
+              <button type="button" class="inline-flex items-center gap-1 ${navLinkClasses(groupActive)}" aria-haspopup="true">
+                ${item.label}<i data-lucide="chevron-down" class="h-4 w-4 transition-transform group-hover:rotate-180"></i>
+              </button>
+              <div class="invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                <div class="min-w-[210px] rounded-xl border border-slate-200 bg-white p-2 shadow-lg">${menu}</div>
+              </div>
+            </div>`;
+        }
+        return `<a href="${item.href}" class="${navLinkClasses(item.id === activeId)}">${item.label}</a>`;
+      })
       .join("");
   }
 
   function renderMobileNav(activeId, quoteTarget) {
     return navItems
-      .map((item) => `<a href="${item.href}" class="py-2 ${item.id === activeId ? "text-brand-orange" : "text-slate-700 hover:text-slate-900"}">${item.label}</a>`)
+      .map((item) => {
+        if (item.type === "dropdown") {
+          const children = item.children
+            .map((c) => `<a href="${c.href}" class="py-1.5 pl-3 ${c.id === activeId ? "text-brand-orange" : "text-slate-600 hover:text-slate-900"}">${c.label}</a>`)
+            .join("");
+          return `<span class="pt-1 text-xs font-semibold uppercase tracking-wide text-slate-400">${item.label}</span><div class="grid">${children}</div>`;
+        }
+        return `<a href="${item.href}" class="py-2 ${item.id === activeId ? "text-brand-orange" : "text-slate-700 hover:text-slate-900"}">${item.label}</a>`;
+      })
       .join("") + `
       <a href="#contact-form" class="py-2 text-slate-700 hover:text-slate-900">Contact</a>
       <div class="flex gap-2 pt-2">
