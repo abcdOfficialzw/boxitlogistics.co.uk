@@ -10,6 +10,8 @@
     { id: "house-removals", label: "House Removals", href: "/house-removals-walsall/" },
     { id: "office-moves", label: "Office Moves", href: "/office-moves-walsall/" },
     { id: "storage", label: "Storage", href: "/storage-solutions-walsall/" },
+    { id: "reviews", label: "Reviews", href: "/reviews/" },
+    { id: "blog", label: "Blog", href: "/blog/" },
     { id: "faqs", label: "FAQs", href: "/faqs/" },
   ];
 
@@ -25,6 +27,8 @@
   const footerAreaLinks = [
     { label: "Removal Company Wolverhampton", href: "/removal-company-wolverhampton/" },
     { label: "Walsall to London Moves", href: "/house-removals-walsall-to-london/" },
+    { label: "Reviews", href: "/reviews/" },
+    { label: "Blog", href: "/blog/" },
     { label: "Privacy Policy", href: "/privacy-policy.html" },
     { label: "Terms of Service", href: "/terms-of-service.html" },
   ];
