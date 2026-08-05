@@ -10,6 +10,7 @@
     { id: "office-moves", label: "Office Moves", href: "/office-moves-walsall/" },
     { id: "storage", label: "Storage", href: "/storage-solutions-walsall/" },
     { id: "handyman", label: "Handyman & Interiors", href: "/handyman-media-walls-midlands/" },
+    { id: "cctv", label: "CCTV Installation", href: "/cctv-installation-walsall/" },
   ];
 
   const navItems = [
@@ -27,6 +28,7 @@
     { label: "Furniture Assembly", href: "/furniture-assembly-dismantling-walsall/" },
     { label: "Storage Solutions", href: "/storage-solutions-walsall/" },
     { label: "Handyman & Media Walls", href: "/handyman-media-walls-midlands/" },
+    { label: "CCTV Installation", href: "/cctv-installation-walsall/" },
     { label: "Removals in Walsall", href: "/removals-walsall/" },
   ];
 
