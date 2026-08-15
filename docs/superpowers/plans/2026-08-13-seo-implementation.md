@@ -83,8 +83,8 @@ Owner: **Titus → Nobert (client)**. Tasks 1–7 need none of this and can star
 **Interfaces:**
 - Produces: `.webp` versions of every content image; HTML references updated. Later tasks (6, 10) reference `assets/og-image.jpg` created in Task 6.
 
-- [ ] **Step 1: Install cwebp** — `brew install webp` (skip if `which cwebp` succeeds)
-- [ ] **Step 2: Convert the two giant PNGs** (resize to max 1600px wide, quality 80):
+- [x] **Step 1: Install cwebp** — `brew install webp` (skip if `which cwebp` succeeds)
+- [x] **Step 2: Convert the two giant PNGs** (resize to max 1600px wide, quality 80):
 
 ```bash
 cd /Users/titus/projects/BoxitLogisticsAndRemovals/boxitlogistics.co.uk
@@ -92,7 +92,7 @@ cwebp -q 80 -resize 1600 0 assets/image.png -o assets/image.webp
 cwebp -q 80 -resize 1600 0 assets/boxit-van.png -o assets/boxit-van.webp
 ```
 
-- [ ] **Step 3: Convert every gallery/blog JPG:**
+- [x] **Step 3: Convert every gallery/blog JPG:**
 
 ```bash
 for f in assets/handyman/*.JPG assets/cctv/*.jpg assets/blog/*.jpg assets/blog/*.png; do
@@ -100,11 +100,11 @@ for f in assets/handyman/*.JPG assets/cctv/*.jpg assets/blog/*.jpg assets/blog/*
 done
 ```
 
-- [ ] **Step 4: Update every HTML reference** from `.png`/`.JPG`/`.jpg` to `.webp` for the converted files (keep `logo.png` and `logo-mark.png` as PNG — they're used for schema/OG until Task 6, but recompress: `cwebp` is not needed; run `sips -Z 600 assets/logo.png` only if visually identical). Find refs: `grep -rn "assets/handyman\|assets/image.png\|boxit-van.png\|assets/cctv\|assets/blog" --include="*.html" .`
-- [ ] **Step 5: Add `loading="lazy"` and explicit `width`/`height`** to every below-the-fold `<img>` in the gallery sections (homepage gallery, handyman gallery). Hero images keep eager loading.
-- [ ] **Step 6: Delete the originals that are no longer referenced:** `git rm assets/image.png assets/boxit-van.png assets/handyman/*.JPG` (only after Step 4's grep returns zero references to them)
-- [ ] **Step 7: Verify** — `du -sh assets/` target under 3 MB; open `index.html` and `handyman-media-walls-midlands/index.html` in a browser and confirm no broken images (`grep -rn "\.JPG\|image\.png\|boxit-van\.png" --include="*.html" .` returns nothing)
-- [ ] **Step 8: Commit** — `git commit -m "perf: ⚡ Convert all images to WebP, ~90% smaller homepage payload"`
+- [x] **Step 4: Update every HTML reference** from `.png`/`.JPG`/`.jpg` to `.webp` for the converted files (keep `logo.png` and `logo-mark.png` as PNG — they're used for schema/OG until Task 6, but recompress: `cwebp` is not needed; run `sips -Z 600 assets/logo.png` only if visually identical). Find refs: `grep -rn "assets/handyman\|assets/image.png\|boxit-van.png\|assets/cctv\|assets/blog" --include="*.html" .`
+- [x] **Step 5: Add `loading="lazy"` and explicit `width`/`height`** to every below-the-fold `<img>` in the gallery sections (homepage gallery, handyman gallery). Hero images keep eager loading.
+- [x] **Step 6: Delete the originals that are no longer referenced:** `git rm assets/image.png assets/boxit-van.png assets/handyman/*.JPG` (only after Step 4's grep returns zero references to them)
+- [x] **Step 7: Verify** — `du -sh assets/` target under 3 MB; open `index.html` and `handyman-media-walls-midlands/index.html` in a browser and confirm no broken images (`grep -rn "\.JPG\|image\.png\|boxit-van\.png" --include="*.html" .` returns nothing)
+- [x] **Step 8: Commit** — `git commit -m "perf: ⚡ Convert all images to WebP, ~90% smaller homepage payload"`
 
 ### Task 2: Replace Tailwind CDN with compiled stylesheet
 
@@ -115,7 +115,7 @@ done
 **Interfaces:**
 - Produces: `/assets/tailwind.css` — every page links this instead of the CDN script. Tasks 10 & 12 (new pages) must use this link and re-run the build if they introduce new utility classes.
 
-- [ ] **Step 1: Create `tailwind.config.js`** with the exact brand config currently inlined in each page head:
+- [x] **Step 1: Create `tailwind.config.js`** with the exact brand config currently inlined in each page head:
 
 ```js
 /** Compiled with: npm run build:css */
@@ -137,7 +137,7 @@ module.exports = {
 };
 ```
 
-- [ ] **Step 2: Create `tailwind-input.css`:**
+- [x] **Step 2: Create `tailwind-input.css`:**
 
 ```css
 @tailwind base;
@@ -145,10 +145,10 @@ module.exports = {
 @tailwind utilities;
 ```
 
-- [ ] **Step 3: Create `package.json`** with `"scripts": { "build:css": "tailwindcss -i tailwind-input.css -o assets/tailwind.css --minify" }` and dev dependency `tailwindcss@^3`; run `npm install && npm run build:css`. Add `node_modules/` to `.gitignore` (create the file — repo has none).
-- [ ] **Step 4: In all 14 pages**, replace the block `<script src="https://cdn.tailwindcss.com"></script>` **plus** the inline `tailwind.config = {...}` script with: `<link rel="stylesheet" href="/assets/tailwind.css">`. Keep each page's small custom `<style>` block (selection colour etc.) — it's independent of Tailwind.
-- [ ] **Step 5: Verify** — open homepage, one service page, one blog post, and `/reviews/` locally (`python3 -m http.server`); confirm identical rendering, working mobile menu, and zero console errors. `grep -rn "cdn.tailwindcss" --include="*.html" .` returns nothing.
-- [ ] **Step 6: Commit** — `git commit -m "perf: ⚡ Replace Tailwind CDN with compiled stylesheet"`
+- [x] **Step 3: Create `package.json`** with `"scripts": { "build:css": "tailwindcss -i tailwind-input.css -o assets/tailwind.css --minify" }` and dev dependency `tailwindcss@^3`; run `npm install && npm run build:css`. Add `node_modules/` to `.gitignore` (create the file — repo has none).
+- [x] **Step 4: In all 14 pages**, replace the block `<script src="https://cdn.tailwindcss.com"></script>` **plus** the inline `tailwind.config = {...}` script with: `<link rel="stylesheet" href="/assets/tailwind.css">`. Keep each page's small custom `<style>` block (selection colour etc.) — it's independent of Tailwind.
+- [x] **Step 5: Verify** — open homepage, one service page, one blog post, and `/reviews/` locally (`python3 -m http.server`); confirm identical rendering, working mobile menu, and zero console errors. `grep -rn "cdn.tailwindcss" --include="*.html" .` returns nothing.
+- [x] **Step 6: Commit** — `git commit -m "perf: ⚡ Replace Tailwind CDN with compiled stylesheet"`
 
 ### Task 3: Remove internal docs from the live site + add form spam protection
 
@@ -159,36 +159,36 @@ module.exports = {
 **Interfaces:**
 - Produces: honeypot field named `company_website` checked in `form-handler.js`; Task 10's page forms inherit it automatically via `site-components.js`.
 
-- [ ] **Step 1: Relocate then remove setup docs** — copy the three setup `.md` files to `../seo-deliverables/site-internal-docs/` (outside the deployed repo), then `git rm GOOGLE_SHEETS_SETUP.md OAUTH2_SETUP.md NEW_OAUTH2_SETUP.md`
-- [ ] **Step 2: Slim `README.md`** to name + one-line description + "internal docs live outside this repo" note
-- [ ] **Step 3: Add honeypot field** to every form template in `site-components.js` (both hero and contact form builders), directly before the submit button:
+- [x] **Step 1: Relocate then remove setup docs** — copy the three setup `.md` files to `../seo-deliverables/site-internal-docs/` (outside the deployed repo), then `git rm GOOGLE_SHEETS_SETUP.md OAUTH2_SETUP.md NEW_OAUTH2_SETUP.md`
+- [x] **Step 2: Slim `README.md`** to name + one-line description + "internal docs live outside this repo" note
+- [x] **Step 3: Add honeypot field** to every form template in `site-components.js` (both hero and contact form builders), directly before the submit button:
 
 ```html
 <input type="text" name="company_website" tabindex="-1" autocomplete="off"
        style="position:absolute;left:-9999px;height:0;width:0" aria-hidden="true">
 ```
 
-- [ ] **Step 4: Reject honeypot submissions** in `form-handler.js` — at the top of the submit handler (near line 168 where `FormData` is read):
+- [x] **Step 4: Reject honeypot submissions** in `form-handler.js` — at the top of the submit handler (near line 168 where `FormData` is read):
 
 ```js
 if (data.company_website) { form.reset(); return; } // bot filled the hidden field
 delete data.company_website;
 ```
 
-- [ ] **Step 5: Add a minimum-time check** — record `Date.now()` when the form first receives focus; if submit fires < 3 s later, silently drop (same pattern as Step 4).
+- [x] **Step 5: Add a minimum-time check** — record `Date.now()` when the form first receives focus; if submit fires < 3 s later, silently drop (same pattern as Step 4).
 - [ ] **Step 6: Verify** — submit a real test enquiry locally and confirm it still reaches the Apps Script endpoint (check the linked Google Sheet); then fill the hidden field via devtools and confirm the submission is dropped.
 - [ ] **Step 7: After deploy, verify removal** — `curl -o /dev/null -w "%{http_code}" https://boxitlogistics.co.uk/GOOGLE_SHEETS_SETUP.md` returns 404 (Cloudflare cache may need purging).
-- [ ] **Step 8: Commit** — `git commit -m "fix: 🔒 Remove internal docs from live site, add form spam protection"`
+- [x] **Step 8: Commit** — `git commit -m "fix: 🔒 Remove internal docs from live site, add form spam protection"`
 
 ### Task 4: Branded 404 page
 
 **Files:**
 - Create: `404.html`
 
-- [ ] **Step 1: Create `404.html`** — reuse the standard page head (compiled CSS link, favicons), `<title>Page Not Found | Boxit Logistics</title>`, `<meta name="robots" content="noindex">`, and a simple centred body: "This page has moved or never existed." with three buttons: Home (`/`), Our Services (`/removals-walsall/`), Get a Quote (`/#quote`). Include the baked-in nav/footer once Task 7 lands (or plain links if built first).
-- [ ] **Step 2: Verify locally** — page renders, links work.
+- [x] **Step 1: Create `404.html`** — reuse the standard page head (compiled CSS link, favicons), `<title>Page Not Found | Boxit Logistics</title>`, `<meta name="robots" content="noindex">`, and a simple centred body: "This page has moved or never existed." with three buttons: Home (`/`), Our Services (`/removals-walsall/`), Get a Quote (`/#quote`). Include the baked-in nav/footer once Task 7 lands (or plain links if built first).
+- [x] **Step 2: Verify locally** — page renders, links work.
 - [ ] **Step 3: After deploy, verify** — `curl -o /dev/null -w "%{http_code}" https://boxitlogistics.co.uk/nonexistent-page-xyz/` returns **404**. If it still returns 200, the host isn't Cloudflare Pages — raise a follow-up to configure the 404 at the host level (see Task 5's dashboard access).
-- [ ] **Step 4: Commit** — `git commit -m "feat: ✨ Add branded 404 page"`
+- [x] **Step 4: Commit** — `git commit -m "feat: ✨ Add branded 404 page"`
 
 ### Task 5: www → apex redirect + HSTS (Cloudflare dashboard)
 
