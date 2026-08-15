@@ -51,6 +51,10 @@
 
   const footerAreaLinks = [
     { label: "Removal Company Wolverhampton", href: "/removal-company-wolverhampton/" },
+    { label: "Removals Bloxwich", href: "/removals-bloxwich/" },
+    { label: "Removals Aldridge", href: "/removals-aldridge/" },
+    { label: "Removals Willenhall", href: "/removals-willenhall/" },
+    { label: "Removals Wednesbury", href: "/removals-wednesbury/" },
     { label: "Walsall to London Moves", href: "/house-removals-walsall-to-london/" },
     { label: "Reviews", href: "/reviews/" },
     { label: "Blog", href: "/blog/" },
