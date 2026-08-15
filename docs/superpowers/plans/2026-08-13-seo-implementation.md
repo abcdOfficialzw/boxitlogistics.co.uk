@@ -207,6 +207,8 @@ curl -sI https://boxitlogistics.co.uk/ | grep -i strict-transport               
 
 ### Task 6: Favicons, OG share image, and social meta
 
+> **MODIFIED 15 Aug (client instruction):** keep the existing logo `og:image` on every page — no new share image. Only per-page text varies (already the case). Steps 1 and 3 dropped. Doctype added site-wide as part of this task (pages previously rendered in quirks mode).
+
 **Files:**
 - Create: `assets/og-image.jpg` (1200×630)
 - Modify: `<head>` of all 17 HTML pages + `404.html`
@@ -215,7 +217,7 @@ curl -sI https://boxitlogistics.co.uk/ | grep -i strict-transport               
 - Produces: canonical head snippet (below) that Tasks 10 & 12 copy into new pages.
 
 - [ ] **Step 1: Create the share image** — 1200×630 JPG from the best van/team photo (use `assets/boxit-van.webp` source or a handyman gallery shot) with the logo overlaid bottom-left and strapline "Removals & Storage · Walsall". Build it with `sips`/preview or any editor; keep under 150 KB. Save as `assets/og-image.jpg`.
-- [ ] **Step 2: Replace the favicon block on every page** with:
+- [x] **Step 2: Replace the favicon block on every page** with:
 
 ```html
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -225,8 +227,8 @@ curl -sI https://boxitlogistics.co.uk/ | grep -i strict-transport               
 ```
 
 - [ ] **Step 3: Point `og:image` and `twitter:image`** on every page to `https://boxitlogistics.co.uk/assets/og-image.jpg`.
-- [ ] **Step 4: Verify** — `grep -rn "logo-mark.png\" \|og:image" --include="*.html" . | grep -v og-image` returns no favicon/OG stragglers; check one page in a social-preview tool (e.g. opengraph.xyz) post-deploy.
-- [ ] **Step 5: Commit** — `git commit -m "fix: 💄 Correct favicon links and add proper social share image"`
+- [x] **Step 4: Verify** — `grep -rn "logo-mark.png\" \|og:image" --include="*.html" . | grep -v og-image` returns no favicon/OG stragglers; check one page in a social-preview tool (e.g. opengraph.xyz) post-deploy.
+- [x] **Step 5: Commit** — `git commit -m "fix: 💄 Correct favicon links and add proper social share image"`
 
 ### Task 7: Title/description fixes + bake nav & footer into static HTML
 

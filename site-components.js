@@ -1,8 +1,23 @@
-(function () {
+/*
+ * Site components: header, contact section, footer, mobile bar.
+ *
+ * The canonical markup for these lives in the template functions below.
+ * Pages ship with the markup baked in statically (run `npm run build:html`
+ * after editing a template or nav link) so crawlers see it without JS.
+ * In the browser this file only renders into placeholders that are still
+ * empty — a safety net for pages that haven't been baked yet.
+ */
+(function (root, factory) {
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = factory(null);
+  } else {
+    root.SiteComponents = factory(root.CONFIG || null);
+  }
+})(typeof window !== "undefined" ? window : globalThis, function (CONFIG) {
   const site = {
-    phoneDisplay: (window.CONFIG && window.CONFIG.DISPLAY_PHONE) || "07741 724209",
-    phoneHref: `+${(window.CONFIG && window.CONFIG.CALL_PHONE) || "447741724209"}`,
-    email: (window.CONFIG && window.CONFIG.EMAIL) || "nobert@boxitlogistics.co.uk",
+    phoneDisplay: (CONFIG && CONFIG.DISPLAY_PHONE) || "07741 724209",
+    phoneHref: `+${(CONFIG && CONFIG.CALL_PHONE) || "447741724209"}`,
+    email: (CONFIG && CONFIG.EMAIL) || "nobert@boxitlogistics.co.uk",
   };
 
   const serviceLinks = [
@@ -65,7 +80,8 @@
               </div>
             </div>`;
         }
-        return `<a href="${item.href}" class="${navLinkClasses(item.id === activeId)}">${item.label}</a>`;
+        const active = item.id === activeId;
+        return `<a href="${item.href}"${active ? ' aria-current="page"' : ""} class="${navLinkClasses(active)}">${item.label}</a>`;
       })
       .join("");
   }
@@ -94,11 +110,10 @@
     `;
   }
 
-  function renderHeader(node) {
-    const activeId = node.dataset.active || "home";
-    const quoteTarget = node.dataset.quoteTarget || "#contact-form";
-
-    node.innerHTML = `
+  function headerHTML(activeId, quoteTarget) {
+    activeId = activeId || "home";
+    quoteTarget = quoteTarget || "#contact-form";
+    return `
       <div class="w-full border-b border-slate-200 bg-slate-50/70">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="flex items-center justify-between py-2 text-xs sm:text-sm text-slate-600">
@@ -169,13 +184,10 @@
     `;
   }
 
-  function renderContactSection(node) {
-    const heading = node.dataset.heading || "Ready to plan your move?";
-    const copy =
-      node.dataset.copy ||
-      "Tell us what you need moved and we will come back with a free, no-obligation quote.";
-
-    node.outerHTML = `
+  function contactHTML(heading, copy) {
+    heading = heading || "Ready to plan your move?";
+    copy = copy || "Tell us what you need moved and we will come back with a free, no-obligation quote.";
+    return `
       <section id="contact-form" class="border-t border-slate-200 bg-slate-50/50">
         <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
           <div class="grid gap-8 lg:grid-cols-3">
@@ -248,19 +260,17 @@
             </div>
           </div>
         </div>
-      </section>
-    `;
+      </section>`;
   }
 
-  function renderFooter(node) {
+  function footerHTML() {
     const services = footerServiceLinks
       .map((item) => `<li><a href="${item.href}" class="hover:text-slate-900">${item.label}</a></li>`)
       .join("");
     const areas = footerAreaLinks
       .map((item) => `<li><a href="${item.href}" class="hover:text-slate-900">${item.label}</a></li>`)
       .join("");
-
-    node.innerHTML = `
+    return `
       <footer class="border-t border-slate-200 bg-slate-50/70">
         <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
           <div class="grid gap-8 text-sm md:grid-cols-4">
@@ -301,10 +311,9 @@
     `;
   }
 
-  function renderMobileBar(node) {
-    const quoteTarget = node.dataset.quoteTarget || "#contact-form";
-
-    node.innerHTML = `
+  function mobileBarHTML(quoteTarget) {
+    quoteTarget = quoteTarget || "#contact-form";
+    return `
       <div class="fixed bottom-0 inset-x-0 z-50 border-t border-slate-200 bg-white/95 backdrop-blur md:hidden">
         <div class="mx-auto max-w-7xl px-4 py-2">
           <div class="grid grid-cols-4 gap-2">
@@ -330,8 +339,22 @@
     `;
   }
 
-  document.querySelectorAll("[data-site-header]").forEach(renderHeader);
-  document.querySelectorAll("[data-site-contact]").forEach(renderContactSection);
-  document.querySelectorAll("[data-site-footer]").forEach(renderFooter);
-  document.querySelectorAll("[data-site-mobile-bar]").forEach(renderMobileBar);
-})();
+  // Browser: render only into placeholders that are still empty (fallback for
+  // pages not yet baked by scripts/build-static-html.js).
+  if (typeof document !== "undefined") {
+    document.querySelectorAll("[data-site-header]").forEach((node) => {
+      if (node.childElementCount === 0) node.innerHTML = headerHTML(node.dataset.active, node.dataset.quoteTarget);
+    });
+    document.querySelectorAll("[data-site-contact]").forEach((node) => {
+      node.outerHTML = contactHTML(node.dataset.heading, node.dataset.copy);
+    });
+    document.querySelectorAll("[data-site-footer]").forEach((node) => {
+      if (node.childElementCount === 0) node.innerHTML = footerHTML();
+    });
+    document.querySelectorAll("[data-site-mobile-bar]").forEach((node) => {
+      if (node.childElementCount === 0) node.innerHTML = mobileBarHTML(node.dataset.quoteTarget);
+    });
+  }
+
+  return { headerHTML, contactHTML, footerHTML, mobileBarHTML };
+});

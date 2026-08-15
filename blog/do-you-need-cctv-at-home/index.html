@@ -50,7 +50,93 @@
   </script>
 </head>
 <body class="bg-brand-cream text-slate-600 antialiased">
-  <div data-site-header data-active="blog"></div>
+  <div data-site-header data-active="blog">
+      <div class="w-full border-b border-slate-200 bg-slate-50/70">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between py-2 text-xs sm:text-sm text-slate-600">
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center gap-1">
+                <i data-lucide="shield-check" class="h-4 w-4 text-brand-orange"></i>
+                Fully insured
+              </span>
+              <span class="hidden sm:inline-flex items-center gap-1">
+                <i data-lucide="house" class="h-4 w-4 text-brand-orange"></i>
+                Family-owned in Walsall Wood
+              </span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="hidden md:inline-flex items-center gap-1">
+                <i data-lucide="truck" class="h-4 w-4 text-brand-orange"></i>
+                Local and nationwide moves
+              </span>
+              <a href="tel:+447741724209" class="inline-flex items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:border-brand-orange hover:bg-brand-cream hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/30">
+                <i data-lucide="phone" class="h-4 w-4 text-brand-orange"></i>
+                07741 724209
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-16 items-center justify-between">
+            <a href="/" class="flex items-center gap-2" aria-label="Boxit Logistics">
+              <img src="/assets/logo-mark.png" alt="Boxit Logistics logo" class="h-8 w-8 rounded-md object-contain">
+              <div class="flex flex-col leading-none">
+                <span style="font-family: 'Plus Jakarta Sans', Inter, ui-sans-serif; letter-spacing: -0.02em;" class="text-lg font-semibold tracking-tight text-slate-900">Boxit Logistics</span>
+                <span class="text-[11px] font-medium text-slate-500 -mt-0.5">House and office removals in Walsall Wood</span>
+              </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-6 text-sm">
+              <a href="/" class="text-slate-600 hover:text-brand-orange focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/30">Home</a>
+            <div class="group relative">
+              <button type="button" class="inline-flex items-center gap-1 text-slate-600 hover:text-brand-orange focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/30" aria-haspopup="true">
+                Services<i data-lucide="chevron-down" class="h-4 w-4 transition-transform group-hover:rotate-180"></i>
+              </button>
+              <div class="invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                <div class="min-w-[210px] rounded-xl border border-slate-200 bg-white p-2 shadow-lg"><a href="/house-removals-walsall/" class="block rounded-md px-3 py-2 text-sm text-slate-600 hover:bg-brand-cream hover:text-brand-orange">House Removals</a><a href="/office-moves-walsall/" class="block rounded-md px-3 py-2 text-sm text-slate-600 hover:bg-brand-cream hover:text-brand-orange">Office Moves</a><a href="/storage-solutions-walsall/" class="block rounded-md px-3 py-2 text-sm text-slate-600 hover:bg-brand-cream hover:text-brand-orange">Storage</a><a href="/handyman-media-walls-midlands/" class="block rounded-md px-3 py-2 text-sm text-slate-600 hover:bg-brand-cream hover:text-brand-orange">Handyman & Interiors</a><a href="/cctv-installation-walsall/" class="block rounded-md px-3 py-2 text-sm text-slate-600 hover:bg-brand-cream hover:text-brand-orange">CCTV Installation</a></div>
+              </div>
+            </div><a href="/reviews/" class="text-slate-600 hover:text-brand-orange focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/30">Reviews</a><a href="/blog/" aria-current="page" class="text-brand-orange">Blog</a><a href="/faqs/" class="text-slate-600 hover:text-brand-orange focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/30">FAQs</a>
+              <a href="#contact-form" class="text-slate-600 hover:text-brand-orange focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/30">Contact</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-3">
+              <a href="tel:+447741724209" class="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 hover:border-brand-orange hover:bg-brand-cream hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/30">
+                <i data-lucide="phone" class="h-4 w-4 text-brand-orange"></i>
+                Call
+              </a>
+              <a href="#contact-form" class="inline-flex items-center gap-2 rounded-md bg-brand-orange px-4 py-2 text-sm font-semibold text-white hover:bg-brand-orange-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/30">
+                <i data-lucide="clipboard-check" class="h-4 w-4"></i>
+                Get a Quote
+              </a>
+            </div>
+
+            <button class="md:hidden inline-flex items-center justify-center rounded-md border border-slate-200 bg-white p-2 text-slate-700 hover:bg-slate-50 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/30" aria-label="Open Menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+              <i data-lucide="menu" class="h-5 w-5"></i>
+            </button>
+          </div>
+        </div>
+        <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white md:hidden">
+          <div class="mx-auto max-w-7xl px-4 py-3 text-sm">
+            <div class="grid gap-2">
+              <a href="/" class="py-2 text-slate-700 hover:text-slate-900">Home</a><span class="pt-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Services</span><div class="grid"><a href="/house-removals-walsall/" class="py-1.5 pl-3 text-slate-600 hover:text-slate-900">House Removals</a><a href="/office-moves-walsall/" class="py-1.5 pl-3 text-slate-600 hover:text-slate-900">Office Moves</a><a href="/storage-solutions-walsall/" class="py-1.5 pl-3 text-slate-600 hover:text-slate-900">Storage</a><a href="/handyman-media-walls-midlands/" class="py-1.5 pl-3 text-slate-600 hover:text-slate-900">Handyman & Interiors</a><a href="/cctv-installation-walsall/" class="py-1.5 pl-3 text-slate-600 hover:text-slate-900">CCTV Installation</a></div><a href="/reviews/" class="py-2 text-slate-700 hover:text-slate-900">Reviews</a><a href="/blog/" class="py-2 text-brand-orange">Blog</a><a href="/faqs/" class="py-2 text-slate-700 hover:text-slate-900">FAQs</a>
+      <a href="#contact-form" class="py-2 text-slate-700 hover:text-slate-900">Contact</a>
+      <div class="flex gap-2 pt-2">
+        <a href="tel:+447741724209" class="flex-1 inline-flex items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
+          <i data-lucide="phone" class="h-4 w-4 text-brand-orange"></i> Call
+        </a>
+        <a href="#contact-form" class="flex-1 inline-flex items-center justify-center gap-2 rounded-md bg-brand-orange px-3 py-2 text-sm font-semibold text-white hover:bg-brand-orange-dark">
+          <i data-lucide="clipboard-check" class="h-4 w-4"></i> Quote
+        </a>
+      </div>
+    
+            </div>
+          </div>
+        </div>
+      </header>
+    <!-- /data-site-header --></div>
   <main>
     <!-- Article header -->
     <section class="border-b border-slate-200 bg-white">
@@ -252,9 +338,143 @@
       </div>
     </article>
   </main>
-  <div data-site-contact data-heading="Ask Us About Home CCTV" data-copy="Considering CCTV for your home or business? Tell us about your property and we'll offer practical, honest advice — plus a free, no-obligation quotation for professional installation."></div>
-  <div data-site-footer></div>
-  <div data-site-mobile-bar></div>
+  <!-- site-contact data-heading="Ask Us About Home CCTV" data-copy="Considering CCTV for your home or business? Tell us about your property and we'll offer practical, honest advice — plus a free, no-obligation quotation for professional installation." -->
+      <section id="contact-form" class="border-t border-slate-200 bg-slate-50/50">
+        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <div class="grid gap-8 lg:grid-cols-3">
+            <div class="lg:col-span-1">
+              <p class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-medium uppercase tracking-[0.22em] text-brand-orange">Free quote</p>
+              <h2 style="font-family: 'Plus Jakarta Sans', Inter, ui-sans-serif; letter-spacing: -0.02em;" class="mt-4 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">Ask Us About Home CCTV</h2>
+              <p class="mt-3 text-slate-600">Considering CCTV for your home or business? Tell us about your property and we'll offer practical, honest advice — plus a free, no-obligation quotation for professional installation.</p>
+              <div class="mt-5 space-y-3 text-sm text-slate-600">
+                <a href="tel:+447741724209" class="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 hover:bg-slate-50">
+                  <i data-lucide="phone" class="h-4 w-4 text-brand-orange"></i>07741 724209
+                </a>
+                <div class="flex flex-wrap gap-2">
+                  <a href="sms:+447741724209" class="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 hover:bg-slate-50">
+                    <i data-lucide="message-circle" class="h-4 w-4 text-brand-orange"></i>Text us
+                  </a>
+                  <a href="mailto:nobert@boxitlogistics.co.uk" class="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 hover:bg-slate-50">
+                    <i data-lucide="mail" class="h-4 w-4 text-brand-orange"></i>Email
+                  </a>
+                </div>
+              </div>
+              <div class="mt-6 rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
+                <p class="font-semibold text-slate-900">What helps us quote quickly?</p>
+                <ul class="mt-3 space-y-2">
+                  <li class="flex gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 text-brand-orange"></i>Collection and delivery postcodes</li>
+                  <li class="flex gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 text-brand-orange"></i>Property or office size</li>
+                  <li class="flex gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 text-brand-orange"></i>Large items, storage, or assembly needs</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lg:col-span-2">
+              <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                <form class="lead-form grid grid-cols-1 gap-4 sm:grid-cols-2" data-form="Footer Contact">
+                  <input type="hidden" name="source" value="Contact Section">
+                  <input type="text" name="company_website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;height:0;width:0" aria-hidden="true">
+                  <div>
+                    <label class="mb-1 block text-xs font-medium text-slate-600">Name</label>
+                    <input name="name" type="text" required placeholder="Your full name" class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20">
+                  </div>
+                  <div>
+                    <label class="mb-1 block text-xs font-medium text-slate-600">Preferred contact</label>
+                    <select name="contact_method" required class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20">
+                      <option value="">Select</option>
+                      <option>Phone</option>
+                      <option>SMS / Text</option>
+                      <option>Email</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="mb-1 block text-xs font-medium text-slate-600">Phone</label>
+                    <input name="phone" type="tel" required placeholder="e.g. 07741 724209" class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20">
+                  </div>
+                  <div>
+                    <label class="mb-1 block text-xs font-medium text-slate-600">Email</label>
+                    <input name="email" type="email" required placeholder="nobert@boxitlogistics.co.uk" class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20">
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="mb-1 block text-xs font-medium text-slate-600">Message</label>
+                    <textarea name="message" rows="4" placeholder="Move details: dates, addresses, floors, parking, special items, storage or assembly requirements..." class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20"></textarea>
+                  </div>
+                  <div class="sm:col-span-2 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
+                    <p class="text-xs text-slate-500">No obligation. We aim to respond quickly and clearly.</p>
+                    <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand-orange px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-orange-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/30 sm:w-auto">
+                      <i data-lucide="send" class="h-4 w-4"></i>
+                      Enquire Now
+                    </button>
+                  </div>
+                </form>
+                <div class="mt-2 text-[11px] text-slate-500">Prefer to speak? Call us at 07741 724209.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section><!-- /site-contact -->
+  <div data-site-footer>
+      <footer class="border-t border-slate-200 bg-slate-50/70">
+        <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+          <div class="grid gap-8 text-sm md:grid-cols-4">
+            <div class="md:col-span-2">
+              <div class="flex items-center gap-2">
+                <img src="/assets/logo-mark.png" alt="Boxit Logistics logo" class="h-8 w-8 rounded-md object-contain">
+                <div class="flex flex-col leading-none">
+                  <span style="font-family: 'Plus Jakarta Sans', Inter, ui-sans-serif; letter-spacing: -0.02em;" class="text-base font-semibold tracking-tight text-slate-900">Boxit Logistics</span>
+                  <span class="text-[11px] font-medium text-slate-500 -mt-0.5">Removals, furniture transport, storage</span>
+                </div>
+              </div>
+              <p class="mt-3 max-w-md text-slate-600">Trusted house removals, office moves, furniture delivery, dismantling and short-term storage across Walsall, the West Midlands, and long-distance UK routes.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <a href="/removals-walsall/" class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 hover:border-brand-orange hover:text-brand-orange">Walsall removals</a>
+                <a href="/removal-company-wolverhampton/" class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 hover:border-brand-orange hover:text-brand-orange">Wolverhampton moves</a>
+                <a href="/house-removals-walsall-to-london/" class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 hover:border-brand-orange hover:text-brand-orange">London relocations</a>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-sm font-semibold text-slate-900">Services</h4>
+              <ul class="mt-3 space-y-2 text-slate-600"><li><a href="/house-removals-walsall/" class="hover:text-slate-900">House Removals</a></li><li><a href="/office-moves-walsall/" class="hover:text-slate-900">Office Moves</a></li><li><a href="/furniture-delivery-walsall/" class="hover:text-slate-900">Furniture Delivery</a></li><li><a href="/furniture-assembly-dismantling-walsall/" class="hover:text-slate-900">Furniture Assembly</a></li><li><a href="/storage-solutions-walsall/" class="hover:text-slate-900">Storage Solutions</a></li><li><a href="/handyman-media-walls-midlands/" class="hover:text-slate-900">Handyman & Media Walls</a></li><li><a href="/cctv-installation-walsall/" class="hover:text-slate-900">CCTV Installation</a></li><li><a href="/removals-walsall/" class="hover:text-slate-900">Removals in Walsall</a></li></ul>
+            </div>
+            <div>
+              <h4 class="text-sm font-semibold text-slate-900">Areas & Contact</h4>
+              <ul class="mt-3 space-y-2 text-slate-600"><li><a href="/removal-company-wolverhampton/" class="hover:text-slate-900">Removal Company Wolverhampton</a></li><li><a href="/house-removals-walsall-to-london/" class="hover:text-slate-900">Walsall to London Moves</a></li><li><a href="/reviews/" class="hover:text-slate-900">Reviews</a></li><li><a href="/blog/" class="hover:text-slate-900">Blog</a></li><li><a href="/privacy-policy.html" class="hover:text-slate-900">Privacy Policy</a></li><li><a href="/terms-of-service.html" class="hover:text-slate-900">Terms of Service</a></li></ul>
+              <div class="mt-5 space-y-2 text-slate-600">
+                <p><a href="tel:+447741724209" class="hover:text-slate-900">07741 724209</a></p>
+                <p><a href="mailto:nobert@boxitlogistics.co.uk" class="hover:text-slate-900">nobert@boxitlogistics.co.uk</a></p>
+                <p>Walsall Wood, West Midlands</p>
+                <p>Mon-Sat: 08:00-18:00</p>
+                <p>Sun: By appointment</p>
+              </div>
+              <p class="mt-4 text-xs text-slate-500">© <span id="year"></span> Boxit Logistics. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    <!-- /data-site-footer --></div>
+  <div data-site-mobile-bar>
+      <div class="fixed bottom-0 inset-x-0 z-50 border-t border-slate-200 bg-white/95 backdrop-blur md:hidden">
+        <div class="mx-auto max-w-7xl px-4 py-2">
+          <div class="grid grid-cols-4 gap-2">
+            <a href="tel:+447741724209" class="inline-flex flex-col items-center justify-center rounded-md border border-slate-200 bg-white px-2 py-2 text-[11px] text-slate-600 hover:bg-slate-50">
+              <i data-lucide="phone" class="h-4 w-4 text-brand-orange"></i>
+              Call
+            </a>
+            <a href="sms:+447741724209" class="inline-flex flex-col items-center justify-center rounded-md border border-slate-200 bg-white px-2 py-2 text-[11px] text-slate-600 hover:bg-slate-50">
+              <i data-lucide="message-circle" class="h-4 w-4 text-brand-orange"></i>
+              Text
+            </a>
+            <a href="mailto:nobert@boxitlogistics.co.uk" class="inline-flex flex-col items-center justify-center rounded-md border border-slate-200 bg-white px-2 py-2 text-[11px] text-slate-600 hover:bg-slate-50">
+              <i data-lucide="mail" class="h-4 w-4 text-brand-orange"></i>
+              Email
+            </a>
+            <a href="#contact-form" class="inline-flex flex-col items-center justify-center rounded-md bg-brand-orange px-2 py-2 text-[11px] font-semibold text-white hover:bg-brand-orange-dark">
+              <i data-lucide="clipboard-check" class="h-4 w-4"></i>
+              Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    <!-- /data-site-mobile-bar --></div>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="/config.js"></script>
   <script src="/site-components.js"></script>
