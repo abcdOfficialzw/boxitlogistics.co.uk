@@ -194,16 +194,16 @@ delete data.company_website;
 
 **Files:** none (dashboard config). Needs Cloudflare account access for `boxitlogistics.co.uk`.
 
-- [ ] **Step 1:** Cloudflare → Rules → Redirect Rules → create: hostname equals `www.boxitlogistics.co.uk` → 301 dynamic redirect to `concat("https://boxitlogistics.co.uk", http.request.uri.path)`, preserve query string.
-- [ ] **Step 2:** Cloudflare → SSL/TLS → Edge Certificates → enable HSTS (max-age 6 months, includeSubDomains **off** initially, preload off).
-- [ ] **Step 3: Verify:**
+- [x] **Step 1:** Cloudflare → Rules → Redirect Rules → create: hostname equals `www.boxitlogistics.co.uk` → 301 dynamic redirect to `concat("https://boxitlogistics.co.uk", http.request.uri.path)`, preserve query string.
+- [x] **Step 2:** Cloudflare → SSL/TLS → Edge Certificates → enable HSTS (max-age 6 months, includeSubDomains **off** initially, preload off).
+- [x] **Step 3: Verify:**
 
 ```bash
 curl -sI https://www.boxitlogistics.co.uk/removals-walsall/ | grep -i 'HTTP\|location'   # expect 301 → apex, path preserved
 curl -sI https://boxitlogistics.co.uk/ | grep -i strict-transport                        # expect HSTS header
 ```
 
-- [ ] **Step 4:** Record both settings in `../seo-deliverables/site-internal-docs/cloudflare-config.md` (created in Task 3's folder).
+- [x] **Step 4:** Record both settings in `../seo-deliverables/site-internal-docs/cloudflare-config.md` (created in Task 3's folder).
 
 ### Task 6: Favicons, OG share image, and social meta
 
@@ -347,7 +347,7 @@ Each page follows the Task 10 pattern with town-specific substance (competition 
 Owner: **Titus** unless marked. Source: report §3 and §5.
 
 **Google Business Profile (top priority):**
-- [ ] Create GBP as `Boxit Logistics & Storage`, category "Moving company" (+ "Storage facility", "Security system installer"), confirmed address, `07741 724209`, website link
+- [ ] ~~Create GBP~~ **A GBP already exists (created by the client, likely Nobert — 15 Aug 2026).** Instead: get access added to it, then audit it — name `Boxit Logistics & Storage`, categories (Moving company + Storage facility + Security system installer), confirmed address, `07741 724209`, website link
 - [ ] Complete verification (client involvement — postcard/video)
 - [ ] Add photos (van, team, jobs), services list, opening hours
 - [ ] Start Google review generation: WhatsApp review-link template sent after every job (client process)
