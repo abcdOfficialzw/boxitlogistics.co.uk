@@ -22,6 +22,7 @@
 
   const serviceLinks = [
     { id: "house-removals", label: "House Removals", href: "/house-removals-walsall/" },
+    { id: "man-and-van", label: "Man and Van", href: "/man-and-van-walsall/" },
     { id: "office-moves", label: "Office Moves", href: "/office-moves-walsall/" },
     { id: "storage", label: "Storage", href: "/storage-solutions-walsall/" },
     { id: "handyman", label: "Handyman & Interiors", href: "/handyman-media-walls-midlands/" },
@@ -38,6 +39,7 @@
 
   const footerServiceLinks = [
     { label: "House Removals", href: "/house-removals-walsall/" },
+    { label: "Man and Van Walsall", href: "/man-and-van-walsall/" },
     { label: "Office Moves", href: "/office-moves-walsall/" },
     { label: "Furniture Delivery", href: "/furniture-delivery-walsall/" },
     { label: "Furniture Assembly", href: "/furniture-assembly-dismantling-walsall/" },
