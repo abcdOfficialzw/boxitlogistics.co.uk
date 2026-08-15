@@ -299,7 +299,7 @@
               <div class="mt-5 space-y-2 text-slate-600">
                 <p><a href="tel:${site.phoneHref}" class="hover:text-slate-900">${site.phoneDisplay}</a></p>
                 <p><a href="mailto:${site.email}" class="hover:text-slate-900">${site.email}</a></p>
-                <p>Walsall Wood, West Midlands</p>
+                <p>17 Coppice Road, Walsall Wood,<br>Walsall WS9 9BL, West Midlands</p>
                 <p>Mon-Sat: 08:00-18:00</p>
                 <p>Sun: By appointment</p>
               </div>
