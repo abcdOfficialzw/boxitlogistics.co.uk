@@ -238,15 +238,15 @@ curl -sI https://boxitlogistics.co.uk/ | grep -i strict-transport               
 **Interfaces:**
 - Produces: static `<header>`/`<footer>` markup present in every page; `site-components.js` reduced to behaviour only (mobile menu toggle, dropdown, form wiring). Tasks 10 & 12 copy the same static header/footer.
 
-- [ ] **Step 1: Fix the three meta problems:**
+- [x] **Step 1: Fix the three meta problems:**
   - London page title → `House Removals Walsall to London | Boxit Logistics` (52 chars)
   - Handyman page title → `Handyman & Media Wall Installation Walsall | Boxit` (50 chars); description → rewrite to ≤ 155 chars keeping "media walls, TV mounting, handyman services, Walsall & West Midlands"
   - Blog index description → trim to ≤ 155 chars
-- [ ] **Step 2: Capture the rendered header/footer** — load the homepage locally, copy the DOM `outerHTML` of the injected `<header>` and `<footer>` from devtools (or reconstruct from `site-components.js` templates).
-- [ ] **Step 3: Paste the static header directly after `<body>` and footer before `</body>`** on all 17 pages + `404.html`. The active-page nav state: add `aria-current="page"` to the matching link per page.
-- [ ] **Step 4: Slim `site-components.js`** — delete the header/footer template-injection code; keep and re-bind: mobile menu open/close, services dropdown, phone/email config substitution (now operate on the static DOM via the same element IDs/classes).
-- [ ] **Step 5: Verify** — with JS disabled in devtools, every page shows full nav and footer links; with JS enabled, mobile menu and dropdown still work; `curl -s https://boxitlogistics.co.uk/ | grep -c 'house-removals-walsall'` (post-deploy) ≥ 2.
-- [ ] **Step 6: Commit** — `git commit -m "fix: 🔍 Bake nav/footer into static HTML, fix over-long titles"`
+- [x] **Step 2: Capture the rendered header/footer** — load the homepage locally, copy the DOM `outerHTML` of the injected `<header>` and `<footer>` from devtools (or reconstruct from `site-components.js` templates).
+- [x] **Step 3: Paste the static header directly after `<body>` and footer before `</body>`** on all 17 pages + `404.html`. The active-page nav state: add `aria-current="page"` to the matching link per page.
+- [x] **Step 4: Slim `site-components.js`** — delete the header/footer template-injection code; keep and re-bind: mobile menu open/close, services dropdown, phone/email config substitution (now operate on the static DOM via the same element IDs/classes).
+- [x] **Step 5: Verify** — with JS disabled in devtools, every page shows full nav and footer links; with JS enabled, mobile menu and dropdown still work; `curl -s https://boxitlogistics.co.uk/ | grep -c 'house-removals-walsall'` (post-deploy) ≥ 2.
+- [x] **Step 6: Commit** — `git commit -m "fix: 🔍 Bake nav/footer into static HTML, fix over-long titles"`
 
 ---
 
@@ -261,8 +261,8 @@ curl -sI https://boxitlogistics.co.uk/ | grep -i strict-transport               
 - Consumes: confirmed name/address from Phase 0; static footer from Task 7.
 - Produces: one canonical JSON-LD block; Tasks 10 & 12 copy it with per-page `@id`/`name` tweaks.
 
-- [ ] **Step 1: Add the confirmed address to the static footer** on every page, marked up plainly (name, street, locality, postcode, phone as `tel:` link).
-- [ ] **Step 2: Upgrade the JSON-LD on every page** — replace the current `address` and add `geo` and `sameAs` (coordinates for 17 Coppice Road WS9 9BL — look up exact values on Google Maps at implementation time; ~52.626, -1.933):
+- [x] **Step 1: Add the confirmed address to the static footer** on every page, marked up plainly (name, street, locality, postcode, phone as `tel:` link).
+- [x] **Step 2: Upgrade the JSON-LD on every page** — replace the current `address` and add `geo` and `sameAs` (coordinates for 17 Coppice Road WS9 9BL — look up exact values on Google Maps at implementation time; ~52.626, -1.933):
 
 ```json
 "name": "Boxit Logistics & Storage",
@@ -284,19 +284,19 @@ curl -sI https://boxitlogistics.co.uk/ | grep -i strict-transport               
 ```
 
   (Verify each `sameAs` URL resolves before committing; drop any that don't.)
-- [ ] **Step 3: Add `aggregateRating`** to the schema **only on `/reviews/`**, matching what the page visibly shows after Task 9 (e.g. Trustpilot 4.2/5, 6 reviews): `"aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.2", "reviewCount": "6"}`. Google requires the rating to be visible on-page — hence reviews page only.
-- [ ] **Step 4: Validate** every changed page with https://validator.schema.org (paste source) — zero errors.
-- [ ] **Step 5: Commit** — `git commit -m "feat: 🔍 Publish full NAP and complete LocalBusiness schema"`
+- [x] **Step 3: Add `aggregateRating`** to the schema **only on `/reviews/`**, matching what the page visibly shows after Task 9 (e.g. Trustpilot 4.2/5, 6 reviews): `"aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.2", "reviewCount": "6"}`. Google requires the rating to be visible on-page — hence reviews page only.
+- [x] **Step 4: Validate** every changed page with https://validator.schema.org (paste source) — zero errors.
+- [x] **Step 5: Commit** — `git commit -m "feat: 🔍 Publish full NAP and complete LocalBusiness schema"`
 
 ### Task 9: Surface real ratings on the site
 
 **Files:**
 - Modify: `index.html` (trust strip near reviews section), `reviews/index.html`
 
-- [ ] **Step 1: Add a trust strip to the homepage** reviews section: "★ 4.2/5 on Trustpilot · ★ 5/5 on MyBuilder (50+ jobs)" — plain HTML + links to both profiles (`rel="noopener"`), styled with existing utility classes.
-- [ ] **Step 2: On `/reviews/`**, add the same strip prominently at the top with both profile links ("Read our Trustpilot reviews", "See our MyBuilder profile").
-- [ ] **Step 3: Verify** figures against the live profiles at implementation time (they may have moved since July) and keep the schema from Task 8 Step 3 in sync.
-- [ ] **Step 4: Commit** — `git commit -m "feat: ✨ Surface Trustpilot and MyBuilder ratings on site"`
+- [x] **Step 1: Add a trust strip to the homepage** reviews section: "★ 4.2/5 on Trustpilot · ★ 5/5 on MyBuilder (50+ jobs)" — plain HTML + links to both profiles (`rel="noopener"`), styled with existing utility classes.
+- [x] **Step 2: On `/reviews/`**, add the same strip prominently at the top with both profile links ("Read our Trustpilot reviews", "See our MyBuilder profile").
+- [x] **Step 3: Verify** figures against the live profiles at implementation time (they may have moved since July) and keep the schema from Task 8 Step 3 in sync.
+- [x] **Step 4: Commit** — `git commit -m "feat: ✨ Surface Trustpilot and MyBuilder ratings on site"`
 
 ### Task 10: Build the Man & Van Walsall page
 
@@ -307,18 +307,18 @@ curl -sI https://boxitlogistics.co.uk/ | grep -i strict-transport               
 **Interfaces:**
 - Consumes: compiled CSS (Task 2), canonical head snippet (Task 6), static header/footer (Task 7), schema block (Task 8).
 
-- [ ] **Step 1: Create the page** using `removals-walsall/index.html` as the structural base, with:
+- [x] **Step 1: Create the page** using `removals-walsall/index.html` as the structural base, with:
   - `<title>Man and Van Walsall | Boxit Logistics</title>` (39 chars)
   - Meta description: `Affordable man and van service in Walsall. Single items, small moves and same-day jobs from a local, insured team. Transparent hourly rates — get a quote.` (154 chars)
   - Canonical: `https://boxitlogistics.co.uk/man-and-van-walsall/`
   - H1: `Man and Van Service in Walsall`
   - Sections: hero with quote CTA · what the service covers (single items, small flat moves, eBay/Marketplace pickups, student moves, same-day) · **transparent hourly pricing table** (the report's key differentiator — nobody local shows prices; get rates from Nobert, schema `priceRange` currently says GBP45–80) · why choose local (Walsall Wood base vs Wolverhampton rivals) · reviews strip (Task 9 component) · FAQ (4 questions: minimum hire time? one item OK? how fast can you come? do you help load?) with `FAQPage` schema · quote form
   - JSON-LD: copy Task 8's block, `"@type": ["MovingCompany","LocalBusiness"]`, plus a `Service` entity `"name": "Man and Van Walsall"`
-- [ ] **Step 2: Add to `sitemap.xml`** (`<loc>https://boxitlogistics.co.uk/man-and-van-walsall/</loc>`, today's `lastmod`, priority 0.9 matching other service pages).
-- [ ] **Step 3: Add "Man & Van" to the services nav dropdown and footer links** in the static markup across all pages (and to the slimmed `site-components.js` link arrays if still used for the dropdown).
-- [ ] **Step 4: Add contextual in-copy links** from `/removals-walsall/`, `/furniture-delivery-walsall/`, and the man-with-a-van blog post ("book our man and van service in Walsall").
-- [ ] **Step 5: Rebuild CSS** (`npm run build:css`) if new utility classes were used; verify page renders correctly and form submits.
-- [ ] **Step 6: Commit** — `git commit -m "feat: ✨ Add Man and Van Walsall service page (top keyword gap)"`
+- [x] **Step 2: Add to `sitemap.xml`** (`<loc>https://boxitlogistics.co.uk/man-and-van-walsall/</loc>`, today's `lastmod`, priority 0.9 matching other service pages).
+- [x] **Step 3: Add "Man & Van" to the services nav dropdown and footer links** in the static markup across all pages (and to the slimmed `site-components.js` link arrays if still used for the dropdown).
+- [x] **Step 4: Add contextual in-copy links** from `/removals-walsall/`, `/furniture-delivery-walsall/`, and the man-with-a-van blog post ("book our man and van service in Walsall").
+- [x] **Step 5: Rebuild CSS** (`npm run build:css`) if new utility classes were used; verify page renders correctly and form submits.
+- [x] **Step 6: Commit** — `git commit -m "feat: ✨ Add Man and Van Walsall service page (top keyword gap)"`
 
 ---
 
@@ -332,13 +332,13 @@ curl -sI https://boxitlogistics.co.uk/ | grep -i strict-transport               
 
 Each page follows the Task 10 pattern with town-specific substance (competition is thin — one weak competitor each per report; do NOT ship four identical pages with the town name swapped, Google treats those as doorway pages):
 
-- [ ] **Step 1: Bloxwich** — `<title>Removals Bloxwich | House & Flat Moves | Boxit</title>`; H1 `Removals in Bloxwich`; unique copy angles: minutes from our Walsall Wood base, note Hidden Gem (clearance niche) doesn't do full moves; local landmarks/estates for authenticity; man-and-van cross-link.
-- [ ] **Step 2: Aldridge** — same structure; angle: Aldridge is next door to Walsall Wood — fastest response times of any area; storage cross-link (people downsize locally).
-- [ ] **Step 3: Willenhall** — angle: AGB and BRM are based here but Boxit matches on reviews and shows pricing; office-moves cross-link.
-- [ ] **Step 4: Wednesbury** — angle: covered same-day; furniture delivery cross-link.
-- [ ] **Step 5:** Each page gets Task 8's JSON-LD with `areaServed` set to the town, sitemap entries, and a footer "Areas we cover" block added across the site linking all four + Walsall + Wolverhampton.
-- [ ] **Step 6: Verify** all four in browser, validate schema, `npm run build:css`, confirm sitemap parses (`python3 -c "import xml.dom.minidom,sys; xml.dom.minidom.parse('sitemap.xml')"`).
-- [ ] **Step 7: Commit** — `git commit -m "feat: ✨ Add nearby-town removals pages (Bloxwich, Aldridge, Willenhall, Wednesbury)"`
+- [x] **Step 1: Bloxwich** — `<title>Removals Bloxwich | House & Flat Moves | Boxit</title>`; H1 `Removals in Bloxwich`; unique copy angles: minutes from our Walsall Wood base, note Hidden Gem (clearance niche) doesn't do full moves; local landmarks/estates for authenticity; man-and-van cross-link.
+- [x] **Step 2: Aldridge** — same structure; angle: Aldridge is next door to Walsall Wood — fastest response times of any area; storage cross-link (people downsize locally).
+- [x] **Step 3: Willenhall** — angle: AGB and BRM are based here but Boxit matches on reviews and shows pricing; office-moves cross-link.
+- [x] **Step 4: Wednesbury** — angle: covered same-day; furniture delivery cross-link.
+- [x] **Step 5:** Each page gets Task 8's JSON-LD with `areaServed` set to the town, sitemap entries, and a footer "Areas we cover" block added across the site linking all four + Walsall + Wolverhampton.
+- [x] **Step 6: Verify** all four in browser, validate schema, `npm run build:css`, confirm sitemap parses (`python3 -c "import xml.dom.minidom,sys; xml.dom.minidom.parse('sitemap.xml')"`).
+- [x] **Step 7: Commit** — `git commit -m "feat: ✨ Add nearby-town removals pages (Bloxwich, Aldridge, Willenhall, Wednesbury)"`
 
 ---
 
