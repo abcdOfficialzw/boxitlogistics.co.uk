@@ -156,6 +156,11 @@ async function testAppScriptIntegration() {
 document.addEventListener('DOMContentLoaded', function() {
   // Lead form handling: show confirmation and process data
   document.querySelectorAll('.lead-form').forEach(function(form) {
+    // Spam protection: remember when a human first interacts with the form
+    form.addEventListener('focusin', function() {
+      if (!form.dataset.focusAt) form.dataset.focusAt = String(Date.now());
+    });
+
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       const submitBtn = form.querySelector('button[type="submit"]');
@@ -166,6 +171,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Collect form data
       const data = Object.fromEntries(new FormData(form).entries());
+
+      // Spam protection: honeypot filled, or submitted within 3s of first focus
+      const focusAt = Number(form.dataset.focusAt || 0);
+      if (data.company_website || !focusAt || Date.now() - focusAt < 3000) {
+        form.reset();
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+        }
+        return;
+      }
+      delete data.company_website;
       data.page = window.location.href;
       data.timestamp = new Date().toISOString();
       

@@ -209,6 +209,7 @@
               <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
                 <form class="lead-form grid grid-cols-1 gap-4 sm:grid-cols-2" data-form="Footer Contact">
                   <input type="hidden" name="source" value="Contact Section">
+                  <input type="text" name="company_website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;height:0;width:0" aria-hidden="true">
                   <div>
                     <label class="mb-1 block text-xs font-medium text-slate-600">Name</label>
                     <input name="name" type="text" required placeholder="Your full name" class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20">
